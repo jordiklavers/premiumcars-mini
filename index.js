@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initTabSystem();
   initSlider();
+  initSwipers();
 });
 
 function initTabSystem() {
@@ -113,32 +114,14 @@ function initTabSystem() {
 }
 
 function initSlider() {
-  const wrapper = document.querySelector('[data-slider="list"]');
-  const slides = gsap.utils.toArray('[data-slider="slide"]');
+  const wrapper = document.querySelector('[data-slider="list"]'); //
+  const slides = gsap.utils.toArray('[data-slider="slide"]'); //
 
   const nextButton = document.querySelector('[data-slider="button-next"]');
   const prevButton = document.querySelector('[data-slider="button-prev"]');
 
-  const totalElement = document.querySelector('[data-slide-count="total"]');
-  const stepElement = document.querySelector('[data-slide-count="step"]');
-  const stepsParent = stepElement.parentElement;
-
   let activeElement;
   const totalSlides = slides.length;
-
-  // Update total slides text, prepend 0 if less than 10
-  totalElement.textContent = totalSlides < 10 ? `0${totalSlides}` : totalSlides;
-
-  // Create step elements dynamically
-  stepsParent.innerHTML = ""; // Clear any existing steps
-  slides.forEach((_, index) => {
-    const stepClone = stepElement.cloneNode(true); // Clone the single step
-    stepClone.textContent = index + 1 < 10 ? `0${index + 1}` : index + 1;
-    stepsParent.appendChild(stepClone); // Append to the parent container
-  });
-
-  // Dynamically generated steps
-  const allSteps = stepsParent.querySelectorAll('[data-slide-count="step"]');
 
   const loop = horizontalLoop(slides, {
     paused: true,
@@ -150,13 +133,6 @@ function initSlider() {
       const nextSibling = element.nextElementSibling || slides[0];
       nextSibling.classList.add("active");
       activeElement = nextSibling;
-
-      // Move the number to the correct spot
-      gsap.to(allSteps, {
-        y: `${-100 * index}%`,
-        ease: "power3",
-        duration: 0.45,
-      });
     },
   });
 
@@ -167,12 +143,12 @@ function initSlider() {
     )
   );
 
-  nextButton.addEventListener("click", () =>
-    loop.next({ ease: "power3", duration: 0.725 })
-  );
-  prevButton.addEventListener("click", () =>
-    loop.previous({ ease: "power3", duration: 0.725 })
-  );
+  // nextButton.addEventListener("click", () =>
+  //   loop.next({ ease: "power3", duration: 0.725 })
+  // );
+  // prevButton.addEventListener("click", () =>
+  //   loop.previous({ ease: "power3", duration: 0.725 })
+  // );
 }
 
 function horizontalLoop(items, config) {
@@ -435,3 +411,5 @@ function horizontalLoop(items, config) {
   });
   return timeline;
 }
+
+function initSwipers() {}
