@@ -412,4 +412,8 @@ function horizontalLoop(items, config) {
   return timeline;
 }
 
-function initSwipers() {}
+function initSwipers() {
+  console.log("test voor git");
+}
+
+console.log("hallo");
