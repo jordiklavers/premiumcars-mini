@@ -413,7 +413,10 @@ function horizontalLoop(items, config) {
 }
 
 function initSwipers() {
-  console.log("test voor git");
+  const imageSwiper = new Swiper(".swiper", {
+    slidesPerView: 3,
+    spaceBetween: 24,
+  });
 }
 
-console.log("hallo");
+console.log("test");
